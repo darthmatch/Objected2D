@@ -305,7 +305,7 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
     public final void _paint (java.awt.Graphics2D g) {
         if (this.isVisible()) {
             if (this.internalImageRerender) {
-                this.renderInternalImage();
+                //this.renderInternalImage();
             }
 
             g.drawImage(internalImage, null, null);
