@@ -115,26 +115,36 @@ public class Image
     }
 
     public void setOpacity(float o) {
+        this.internalImageRerender = true;
+
 	this.scales[3] = o;
 	rescale = new RescaleOp(this.scales, this.offsets, null);
     }
 
     public void setRed(float r) {
+        this.internalImageRerender = true;
+
 	this.scales[0] = r;
 	rescale = new RescaleOp(this.scales, this.offsets, null);
     }
 
     public void setGreen(float g) {
+        this.internalImageRerender = true;
+
 	this.scales[1] = g;
 	rescale = new RescaleOp(this.scales, this.offsets, null);
     }
 
     public void setBlue(float b) {
+        this.internalImageRerender = true;
+
 	this.scales[2] = b;
         rescale = new RescaleOp(this.scales, this.offsets, null);
     }
 
     public void removeAllFilter() {
+        this.internalImageRerender = true;
+
         this.rescale = null;
     }
 
@@ -181,6 +191,8 @@ public class Image
      * @param y factor y
      */
     public Image scale (double x, double y) {
+        this.internalImageRerender = true;
+        
         //scale
         java.awt.geom.AffineTransform at =
             java.awt.geom.AffineTransform.getScaleInstance((double)x,
@@ -222,7 +234,7 @@ public class Image
 
     public void paint (java.awt.Graphics2D g) {
         if (this.loaded)
-            g.drawImage(this.img, this.rescale, this.getXPos(), this.getYPos());
+            g.drawImage(this.img, this.rescale, 0, 0);
         else
             this.debug("Objected2DImage::Image not initalised.");
     }

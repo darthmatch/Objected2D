@@ -51,10 +51,10 @@ public class Line
 
     public void paint (java.awt.Graphics2D g) {
         g.drawLine(
-                this.getXPos(),
-                this.getYPos(),
-                this.getXPos(this.getWidth()),
-                this.getYPos(this.getHeight())
+                0,
+                0,
+                this.getWidth(),
+                this.getHeight()
         );
     }
 }

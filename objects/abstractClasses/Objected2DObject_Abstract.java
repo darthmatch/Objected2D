@@ -11,6 +11,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -45,10 +46,10 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
         _height;
 
     //internal image representation of the object
-    private Image internalImage;
+    private BufferedImage internalImage;
 
     //trigger to rerender object
-    private boolean internalImageRerender = true;
+    protected boolean internalImageRerender = true;
 
     public boolean setParent(Objected2D parent) {
         if (!this.parentAlreadySet) {
@@ -134,10 +135,19 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
      * @param yOffset
      */
     synchronized public Objected2DObject move (double offset) {
+        return this.move(offset, this.direction);
+    }
+
+    /**
+     * move in the set direction
+     * @param xOffset
+     * @param yOffset
+     */
+    synchronized public Objected2DObject move (double offset, int direction) {
         this.lock.lock();
         try {
-            this.xPos += Math.cos(Math.toRadians(this.direction))*offset;
-            this.yPos += Math.sin(Math.toRadians(this.direction))*offset;
+            this.xPos += Math.cos(Math.toRadians(direction))*offset;
+            this.yPos += Math.sin(Math.toRadians(direction))*offset;
         } finally {
             this.lock.unlock();
         }
@@ -250,10 +260,14 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
     }
 
     protected void setHeight(int height) {
+        this.internalImageRerender = true;
+
         this._height = height;
     }
 
     protected void setWidth(int width) {
+        this.internalImageRerender = true;
+        
         this._width = width;
     }
 
@@ -262,14 +276,19 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
     }
 
     public void changeDirectionTo (int direction) {
+        this.rotateTo(direction);
+
         this.direction = direction;
     }
 
     public void changeDirection (int direction) {
+        
         this.direction += direction;
 
         if (this.direction > 360)
             this.direction -= 360;
+
+        this.rotateTo(this.direction);
     }
 
     @Override public Objected2DObject clone () {
@@ -305,28 +324,46 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
     public final void _paint (java.awt.Graphics2D g) {
         if (this.isVisible()) {
             if (this.internalImageRerender) {
-                //this.renderInternalImage();
+                this.renderInternalImage();
             }
 
-            g.drawImage(internalImage, null, null);
-
-            g.setColor(this.color);
-            this.paint(g);
+            g.drawImage(
+                    this.internalImage, null, this.getXPos(), this.getYPos()
+                    );
             }
     }
 
-    /*public void rotate () {
+    public void renderInternalImage () {
+        this.internalImage = new BufferedImage(
+                this.getHeight(), this.getWidth(), BufferedImage.TYPE_INT_ARGB
+                );
+
+        Graphics2D g = (Graphics2D) this.internalImage.getGraphics();
+        g.setColor(this.color);
+        this.paint(g);
+
+        this.internalImageRerender = false;
+    }
+
+    public void rotateTo (int degrees) {
+        this.renderInternalImage();
+        
+        this.rotate(direction);
+    }
+
+    public void rotate (int degrees) {
         AffineTransform affineTransform = AffineTransform.getRotateInstance(
                 Math.toRadians(degrees),
-                src.getWidth() / 2,
-                src.getHeight() / 2);
-        BufferedImage rotatedImage = new BufferedImage(src.getWidth(), src
-                .getHeight(), src.getType());
+                this.getWidth() / 2,
+                this.getHeight() / 2);
+        BufferedImage rotatedImage = new BufferedImage(this.getWidth(), this
+                .getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = (Graphics2D) rotatedImage.getGraphics();
         g.setTransform(affineTransform);
-        g.drawImage(src, 0, 0, null);
-        return rotatedImage;
-    }*/
+        g.drawImage(this.internalImage, 0, 0, null);
+
+        this.internalImage = rotatedImage;
+    }
 
     protected void debug (Object object) {
         System.out.println(String.valueOf(object));
