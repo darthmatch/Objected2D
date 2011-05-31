@@ -40,7 +40,6 @@ public class Timer extends Thread {
      * @param wait ms to wait after callback is run
      */
     public void addCallback (TimerCallback object, int wait) {
-        
         this.callbacks.add(object);
     }
 
