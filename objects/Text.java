@@ -76,6 +76,6 @@ public class Text
     }
 
     public void paint (java.awt.Graphics2D g) {
-        g.drawString(this.text, this.getXPos(), this.getYPos());
+        g.drawString(this.text, 0, 0);
     }
 }

@@ -66,6 +66,8 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
     }
 
     public void setColor (java.awt.Color color) {
+        this.internalImageRerender = true;
+
         this.color = color;
     }
 

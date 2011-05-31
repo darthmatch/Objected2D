@@ -70,15 +70,15 @@ public class Rect
     public void paint (java.awt.Graphics2D g) {
         if (this.filled)
             g.fillRect(
-                    this.getXPos(),
-                    this.getYPos(),
+                    0,
+                    0,
                     this.getWidth(),
                     this.getHeight()
                     );
         else
             g.drawRect(
-                    this.getXPos(),
-                    this.getYPos(),
+                    0,
+                    0,
                     this.getWidth(),
                     this.getHeight()
                     );

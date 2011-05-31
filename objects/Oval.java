@@ -40,8 +40,8 @@ public class Oval
 
     public final void paint (java.awt.Graphics2D g) {
         if (this.filled)
-            g.fillOval(this.getXPos(), this.getYPos(), this.getWidth(), this.getHeight());
+            g.fillOval(0, 0, this.getWidth(), this.getHeight());
         else
-            g.drawOval(this.getXPos(), this.getYPos(), this.getWidth(), this.getHeight());
+            g.drawOval(0, 0, this.getWidth(), this.getHeight());
     }
 }
