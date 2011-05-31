@@ -41,6 +41,7 @@ public class Timer extends Thread {
      */
     public void addCallback (TimerCallback object, int wait) {
         this.callbacks.add(object);
+        
     }
 
     public void setObject (String name, Objected2DObject object) {
