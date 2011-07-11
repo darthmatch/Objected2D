@@ -95,11 +95,12 @@ public class Objected2D implements Objected2DObjectContainer {
         this.graphicsCopy = (java.awt.Graphics2D) this.imageCopy.getGraphics();
 
         //Antialiasing
-        if (this.antialiasing)
+        if (this.antialiasing) {
             this.graphicsCopy.setRenderingHint(
                         java.awt.RenderingHints.KEY_ANTIALIASING,
                         java.awt.RenderingHints.VALUE_ANTIALIAS_ON
                     );
+            }
 
         //Fill background
         this.graphicsCopy.setColor(java.awt.Color.WHITE);

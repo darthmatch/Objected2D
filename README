@@ -1,0 +1,35 @@
+--------------------------------
+Objected2D
+--------------------------------
+Author		Till Ehrengruber
+Copyright 	Till Ehrengruber
+Written		2011
+Language	Java
+
+The Objected2D Package is an interface to communicate with the Graphics2D Api of Java in an OOP-Style.
+
+Example:
+//Create Window
+Objected2DWindow window = new Objected2DWindow(600, 600, true);
+
+//Get object
+Objected2DExtended objected2D = window.getObjected2DExtended();
+
+//Create Rectangle
+Rect image = new Rect(0, 0, 200, 200);
+image.changeDirectionTo(45);	//Rotate rect
+image.setVelocity(10);
+
+//Add Object
+objected2D.addObject(image);
+
+while (true) {
+	window.repaint();
+}
+
+Features:
+ Collisions
+ Velocity
+
+Bugs:
+ If an Object is surrounded by another the result of the collision will be true.
