@@ -5,12 +5,8 @@
 
 package Objected2D.objects.abstractClasses;
 import Objected2D.*;
-import Objected2D.objects.*;
-import Objected2D.Objected2DUtils;
-import Objected2D.Objected2DWindow;
 import Objected2D.objects.interfaces.Objected2DCollisionObject;
 import Objected2D.util.CollisionPointDetector;
-import java.awt.Color;
 
 /**
  *
@@ -108,13 +104,13 @@ public abstract class Objected2DCollisionObject_abstract
 
 
 
-        int heightMax = this.collisionPoints[0].length/*+this.getYPos()*/;
-        int widthMax = this.collisionPoints.length/*+this.getXPos()*/;
+        int widthMax = this.collisionPoints[0].length/*+this.getYPos()*/;
+        int heightMax = this.collisionPoints.length/*+this.getXPos()*/;
         int xOffset = object.getXPos() - this.getXPos();
         int yOffset = object.getYPos() - this.getYPos();
         boolean collision = false;
 
-        Objected2DUtils.print2DArrayMatrixCombined(this.getCollisionPoints(), objectCollisionPoints, xOffset, yOffset);
+        //Objected2DUtils.print2DArrayMatrixCombined(this.getCollisionPoints(), objectCollisionPoints, xOffset, yOffset);
 
         //this.debug("x:"+xOffset);
         //this.debug("y:"+yOffset);
