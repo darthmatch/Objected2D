@@ -13,23 +13,27 @@ import java.awt.*;
  * @author Till Ehrengruber <darthmatch@googlemail.com>
  * @copyright  2011 Till Ehrengruber <darthmatch@googlemail.com>
  */
-public class Objected2DWindowFrame extends javax.swing.JPanel {
+public class Objected2DCanvas extends Canvas {
     protected Objected2D objected2D = null;
     protected boolean objected2DAlreadySet = false;
     protected boolean extended;
 
-    //protected
-
-    public Objected2DWindowFrame (boolean extended) {
+    public Objected2DCanvas (boolean extended) {
         this.extended = extended;
-        
-        //Set to size of parent element
-        //this.setSize(dim);
+    }
 
-        /*
-         * Init Objected Graphics 2D Api
-         */
-        //this.objected2D =
+    public Objected2DCanvas (int x, int y, boolean extended) {
+        this.setSize(x, y);
+        this.extended = extended;
+
+        this.createObjected2D();
+    }
+
+    public Objected2DCanvas (Dimension dim, boolean extended) {
+        this.setSize((int) dim.getWidth(), (int) dim.getHeight());
+        this.extended = extended;
+
+        this.createObjected2D();
     }
 
     public boolean extended () {
@@ -45,6 +49,10 @@ public class Objected2DWindowFrame extends javax.swing.JPanel {
             this.objected2DAlreadySet = true;
         }
         
+    }
+
+    public Objected2D getObjected2D () {
+        return this.objected2D;
     }
 
     public void paint(Graphics g) {

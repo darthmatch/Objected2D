@@ -18,7 +18,7 @@ import Objected2D.util.Mouse;
  */
 public class Objected2DWindow extends javax.swing.JFrame {
 
-    protected Objected2DWindowFrame windowFrame;
+    protected Objected2DCanvas windowFrame;
 
     protected boolean mouseAlreadySet = false;
 
@@ -42,7 +42,7 @@ public class Objected2DWindow extends javax.swing.JFrame {
                 );
 
         //Zeichenfläche hinzufügen
-        this.windowFrame = new Objected2DWindowFrame(extended);
+        this.windowFrame = new Objected2DCanvas(extended);
         this.add(this.windowFrame);
         this.setVisible(true);
         this.windowFrame.createObjected2D();
