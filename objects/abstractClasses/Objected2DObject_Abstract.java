@@ -293,6 +293,10 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
         this.rotateTo(this.direction);
     }
 
+    /**
+     * Clone Object
+     * @return
+     */
     @Override public Objected2DObject clone () {
         try {
             return (Objected2DObject) super.clone();
@@ -330,14 +334,16 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
             }
 
             g.drawImage(
-                    this.internalImage, null, this.getXPos(), this.getYPos()
-                    );
+                    this.internalImage, null, this.getXPos(), this.getYPos());
             }
     }
 
+    /**
+     * Return internal image
+     */
     public void renderInternalImage () {
         this.internalImage = new BufferedImage(
-                this.getHeight(), this.getWidth(), BufferedImage.TYPE_INT_ARGB
+                this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_ARGB
                 );
 
         Graphics2D g = (Graphics2D) this.internalImage.getGraphics();
@@ -347,12 +353,20 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
         this.internalImageRerender = false;
     }
 
+    /**
+     * Rotate original image
+     * @param degrees
+     */
     public void rotateTo (int degrees) {
         this.renderInternalImage();
         
         this.rotate(direction);
     }
 
+    /**
+     * rotate more over
+     * @param degrees
+     */
     public void rotate (int degrees) {
         AffineTransform affineTransform = AffineTransform.getRotateInstance(
                 Math.toRadians(degrees),

@@ -36,6 +36,7 @@ public abstract class Objected2DCollisionObject_abstract
                 .getCollisionPoints();
         
         //Objected2DUtils.print2DArrayMatrix(this.collisionPoints);
+        //System.exit(0);
         
         this.collisionPointsSet = true;
         return this.collisionPoints;
@@ -113,7 +114,7 @@ public abstract class Objected2DCollisionObject_abstract
         int yOffset = object.getYPos() - this.getYPos();
         boolean collision = false;
 
-        //Objected2DUtils.print2DArrayMatrixCombined(this.getCollisionPoints(), objectCollisionPoints, xOffset, yOffset);
+        Objected2DUtils.print2DArrayMatrixCombined(this.getCollisionPoints(), objectCollisionPoints, xOffset, yOffset);
 
         //this.debug("x:"+xOffset);
         //this.debug("y:"+yOffset);
@@ -161,8 +162,8 @@ public abstract class Objected2DCollisionObject_abstract
         
         //this.debug("Collision: "+collision);
 
-        if (!collision)
-            this.debug("x:"+(xOffset)+" y: "+(yOffset));
+        //if (!collision)
+        //    this.debug("x:"+(xOffset)+" y: "+(yOffset));
 
         return collision;
     }

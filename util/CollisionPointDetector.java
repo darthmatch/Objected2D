@@ -177,8 +177,9 @@ public final class CollisionPointDetector {
     protected boolean checkForCollisionAbove (int x, int y, int[] cLine,
             int[] lastLine, int[] lineBeforeLastLine) {
         
-        if (y==0)
+        if (y==0) {
             return false;
+        }
         else {
             if (this.visible(x, cLine) && (this.inVisible(x, lastLine)
                     || this.inVisible(x, lineBeforeLastLine)))
@@ -191,8 +192,12 @@ public final class CollisionPointDetector {
     protected boolean checkForCollisionLeft (int x, int y, int[] cLine,
             int[] lastLine, int[] lineBeforeLastLine) {
 
-        if (y==0)
-            return false;
+        if (y==0) {
+            if (this.visible(x, cLine))
+                return true;
+            else
+                return false;
+        }
         else {
             if (this.visible(x, cLine) && (this.inVisible(x-1, cLine)
                     || this.inVisible(x-2, cLine)))
@@ -231,7 +236,7 @@ public final class CollisionPointDetector {
 
     protected boolean inVisible (int x, int[] data) {
         if (data==null || x < 0 || x > data.length)
-            return false;
+            return true;
 
         if (this.getAlphaValue(data[x]) == 0)
             return true;
@@ -240,7 +245,7 @@ public final class CollisionPointDetector {
     }
 
     protected boolean visible (int x, int[] data) {
-        if (data==null || x < 0|| x > data.length)
+        if (data==null || x < 0 || x > data.length)
             return false;
         
         if (this.getAlphaValue(data[x]) > 0)

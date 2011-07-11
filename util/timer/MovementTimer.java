@@ -77,7 +77,7 @@ public class MovementTimer {
                 timeSinceLastCall = this.currTime;
 
                 for (Objected2DVelocityObject_abstract object : objects) {
-                    System.out.println(((double) (object.getVelocity() * this.time))/1000000000);
+                    //System.out.println(((double) (object.getVelocity() * this.time))/1000000000);
                     object.move(((double) (object.getVelocity() * this.time))/1000000000);
                 }
 
