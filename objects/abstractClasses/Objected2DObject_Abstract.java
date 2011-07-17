@@ -79,7 +79,7 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
         return (int) this.xPos;
     }
 
-    public int getXPos (int offset) {
+    public synchronized int getXPos (int offset) {
         return (int) this.xPos+offset;
     }
 
@@ -87,7 +87,7 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
         return (int) this.yPos;
     }
 
-    public int getYPos (int offset) {
+    public synchronized int getYPos (int offset) {
         return (int) this.yPos+offset;
     }
 
@@ -283,7 +283,7 @@ public abstract class Objected2DObject_Abstract implements Objected2DObject, Clo
         this.direction = direction;
     }
 
-    public void changeDirection (int direction) {
+    public synchronized void changeDirection (int direction) {
         
         this.direction += direction;
 
